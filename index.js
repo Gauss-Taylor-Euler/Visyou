@@ -10,15 +10,13 @@ let stop = false; //Permet d'empecher les  videos de se charger qu'on veut remon
 let chemin = "watch-history.json"; //chemin vers le fichier contenant le watch history en json
 function remonter() {
   //Permet de remonter dans le dossier parent
-  if (!explode) {
-    stop = true;
-    explode = false;
-    if (state > 0) {
-      state--;
-    }
-
-    showPage();
+  stop = true;
+  explode = false;
+  if (state > 0) {
+    state--;
   }
+
+  showPage();
 }
 function parseJour(jour) {
   if (jour) {
