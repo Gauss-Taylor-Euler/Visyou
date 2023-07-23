@@ -1,0 +1,96 @@
+/*general*/
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "MontSerrat";
+  box-sizing: border-box;
+}
+:root {
+  background-color: #777474;
+  color: white;
+  --box-shadow: black 1px 1px 20px;
+}
+/*header*/
+header {
+  background-color: #1b1b1b;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/*affichage du nombre de video*/
+.nb-vid {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+/*button back */
+
+.back {
+  height: 8vh;
+  display: flex;
+  margin-top: 1rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #ececec;
+  font-size: 2rem;
+  color: #1b1b1b;
+  box-shadow: var(--box-shadow);
+}
+/*contenneur de vid*/
+
+#affichage {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.folder {
+  color: white;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  margin: 2rem;
+}
+.folder i {
+  font-size: 8rem;
+}
+.title {
+  color: white;
+  padding: 1rem;
+  font-size: 0.8rem;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+/*video */
+.video {
+  background-color: black;
+  width: 16vw;
+  height: 30vh;
+  margin: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.video img {
+  width: 100%;
+  height: 100%;
+}
+/*hover*/
+
+.video:hover {
+  background-color: blue;
+}
+.folder:hover {
+  background-color: rgb(136, 134, 134);
+}
