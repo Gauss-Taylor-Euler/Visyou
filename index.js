@@ -1,4 +1,4 @@
-let key = "VOTRE CLE"; //clé de l'api youtube data
+let key = ""; //clé de l'api youtube data
 let videos = []; //tableau de nos videos recupéré depuis les fichier json
 let when = [0, 0, 0]; //Quand ? indice 0 c'est les années , le 1 le mois et le 2 le jour.
 let explode = false; //Est-ce que les videos sont visibles directement
@@ -18,12 +18,7 @@ function remonter() {
 
   showPage();
 }
-function parseJour(jour) {
-  if (jour) {
-    return jour;
-  }
-  return 0;
-}
+
 async function initialiser() {
   //initialise la page en prenant les donnees de l'historque et en affichant le root
   let doc = await fetch(chemin).then((result) => result.json());
