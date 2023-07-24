@@ -7,7 +7,9 @@ let affichageNb = document.querySelector(".nb-vid"); //affichage du nombre de vi
 let affichage = document.querySelector("#affichage"); //affichage des videos ou folder
 let backer = document.querySelector(".back"); //bouton de retour en arrière
 let stop = false; //Permet d'empecher les  videos de se charger qu'on veut remonter
-let chemin = "watch-history.json"; //chemin vers le fichier contenant le watch history en json
+let input = document.querySelector("#fileReader"); //Pour choisir le fichier json
+let contenu = document.querySelector("#afterRead"); //Pour traiter l'affichage du contenu après le choix du fichier
+let btnRead = document.querySelector(".btn-lecture"); //btn pour lire
 function remonter() {
   //Permet de remonter dans le dossier parent
   stop = true;
@@ -19,18 +21,24 @@ function remonter() {
   showPage();
 }
 
-async function initialiser() {
+function initialiser() {
   //initialise la page en prenant les donnees de l'historque et en affichant le root
-  let doc = await fetch(chemin).then((result) => result.json());
-  videos = doc.map((elem) => {
-    let date = new Date(elem.time);
+  let reader = new FileReader();
+  reader.readAsText(input.files[0]);
+  reader.onload = () => {
+    doc = JSON.parse(reader.result);
+    videos = doc.map((elem) => {
+      let date = new Date(elem.time);
 
-    return {
-      lien: elem.titleUrl,
-      date: [date.getFullYear(), date.getMonth() + 1, date.getDate()],
-    };
-  });
-  showPage();
+      return {
+        lien: elem.titleUrl,
+        date: [date.getFullYear(), date.getMonth() + 1, date.getDate()],
+      };
+    });
+    btnRead.style.display = "none";
+    contenu.style.display = "block";
+    showPage();
+  };
 }
 
 function testVidByState(video) {
@@ -41,6 +49,12 @@ function testVidByState(video) {
     }
   }
   return true;
+}
+function format(n) {
+  if (n < 10) {
+    return "0" + n;
+  }
+  return "" + n;
 }
 function vidstate() {
   //renvoie les videos qui correspondent à when
@@ -107,9 +121,9 @@ function showPage() {
     });
     //Pour chaque élement du tableau on le remplit correctement
     elemTab.forEach((elem) => {
-      let texte = elem.id;
+      let texte = format(elem.id);
       for (let i = state - 1; i >= 0; i--) {
-        texte += "/" + when[i];
+        texte += "/" + format(when[i]);
       }
       elem.innerHTML = `
     <i class="fa-regular fa-folder"></i><span class="title">${texte}</span>
@@ -127,5 +141,8 @@ function showPage() {
 }
 
 //initialisation et ajout du listener pour pouvoir remonter dans le dossier parent si nécessaire
-initialiser();
+btnRead.addEventListener("click", () => {
+  input.click();
+  initialiser();
+});
 backer.addEventListener("click", remonter);

@@ -94,3 +94,19 @@ header {
 .folder:hover {
   background-color: rgb(136, 134, 134);
 }
+/*file reader*/
+#fileReader {
+  display: none;
+}
+
+.btn-lecture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  height: 100vh;
+}
+
+#afterRead {
+  display: none;
+}
